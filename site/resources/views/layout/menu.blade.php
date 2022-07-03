@@ -1,7 +1,7 @@
 
 <!-- Navigation bar Start-->
 <nav class="navbar fixed-top nav-before navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img class="nav-logo" src="images/navlogo.png"></a>
+    <a class="navbar-brand" href="#"><img class="nav-logo" src={{asset('images/navlogo.png')}} width="20px" height="20px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
