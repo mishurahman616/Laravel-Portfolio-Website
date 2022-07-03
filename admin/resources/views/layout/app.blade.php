@@ -6,19 +6,29 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" {{ asset('css/bootstrap.min.css') }}>
-    <link rel="stylesheet" {{ asset('css/mdb.min.css') }}>
-    <link rel="stylesheet" {{ asset('css/sidenav.css') }}>
-    <link rel="stylesheet" {{ asset('css/style.css') }}>
-    <link rel="stylesheet" {{ asset('css/responsive.css') }}>
-    <link rel="stylesheet" {{ asset('css/datatables.min.css') }}>
-    <link rel="stylesheet" {{ asset('css/datatables-select.min.css') }}>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidenav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables-select.min.css') }}">
+   
 
 </head>
 <body>
-    @yield('content')
+
+    @include('layout.menu') <!-- including side bar menu-->
+
+    @yield('content') <!-- main content-->
 
     
+
+
+
+</div> <!-- End of page-wrapper which begins in side bar menu-->
+</div> <!-- End of main-wrapper which begins in side bar menu-->
+
 <!-- Necessary Javascript -->
 <script src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" {{ asset('js/popper.min.js') }}></script>
