@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class visitor extends Model
+class Visitor extends Model
 {
    public $table='visitors';
    public $primaryKey='id';
