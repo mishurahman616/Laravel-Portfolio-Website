@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'HomeIndex']);
 
-Route::get('/visitors', [VisitorController::class, 'VisitorIndex']);
+Route::get('/visitors', [VisitorController::class, 'visitorIndex']);
+Route::get('/services', [ServiceController::class, 'serviceIndex']);
+Route::get('/getServiceData', [ServiceController::class, 'getServiceData']);
+Route::post('/deleteService', [ServiceController::class, 'deleteService']);

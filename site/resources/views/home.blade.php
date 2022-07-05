@@ -6,6 +6,7 @@ Home
 
 <!-- Main content section -->
 @section('content')
-<h1>Welcome</h1>
+@include('component.homeBanner')
+@include('component.homeServices')
 @endsection
 

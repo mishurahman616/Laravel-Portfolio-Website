@@ -10,9 +10,9 @@ class VisitorController extends Controller
 /**
  * It returns a view called visitor, and passes the variable $visitorData to the view which contains all visitor data as object
  */
-    public function VisitorIndex()
+    public function visitorIndex()
     {
-        $VisitorsData=Visitor::all()->orderBy('id', 'desc'); 
-        return view('visitor', ['visitorsData'=>$VisitorsData]);
+        $visitorsData=Visitor::orderBy('id', 'desc')->get(); 
+        return view('visitor', ['visitorsData'=>$visitorsData]);
     }
 }
