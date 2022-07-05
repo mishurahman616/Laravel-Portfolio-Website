@@ -23,7 +23,7 @@ function getServiceData() {
                         "<td>" + item.service_title + "</td>" +
                         "<td>" + item.service_desc + "</td>" +
                         "<td><a ><i class='fas fa-edit'></i></a></td>" +
-                        "<td><a href='#' data-id=" + item.id + " data-title='" + item.service_title + "' class='deleteService'><i class='fas fa-trash-alt'></i></a></td>"
+                        "<td><a data-id=" + item.id + " data-title='" + item.service_title + "' class='deleteService'><i class='fas fa-trash-alt'></i></a></td>"
                     ));
                 });
                 /*If data comes from database, hiding the loader and error message and showing the table. */
