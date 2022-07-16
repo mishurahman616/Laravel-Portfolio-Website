@@ -21,7 +21,7 @@ class HomeController extends Controller
         $timeDate=date('Y-m-d h:i:sa');
         Visitor::insert(['ip_address'=>$userIP, 'visiting_time'=>$timeDate]);
 
-        $serviceData=Service::all();
+        $serviceData=Service::orderBy('id')->limit(4)->get();
 
         return view('home', ['serviceData'=>$serviceData]);
     }

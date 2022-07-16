@@ -5,10 +5,15 @@ Admin | Services
 @endsection
 
 @section('content')
+
 <!-- Display if data loaded successfully-->
 <div id="service-table-main" class="container d-none">
     <div class="row">
         <div class="col-md-12 p-5">
+            <h4 class="text-center">All Services</h4>
+
+            <!--Button for add new service -->
+            <button id="addNewServiceButton" class="btn btn-primary mb-3 ml-0">Add New</button>
             <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -48,19 +53,70 @@ Admin | Services
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete?</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
-        </div>
-        <h6 class="text-left ml-3 pt-2" id="deleteTitle"></h6>
-        <div class="modal-footer">
-          <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
-          <button id="serviceDeleteConfirmation"  data-id=""  class="btn btn-danger">Delete</button>
-        </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete?</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <h6 class="text-left ml-3 pt-2" id="deleteTitle"></h6>
+            <div class="modal-footer">
+                <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button id="serviceDeleteConfirmation"  data-id=""  class="btn btn-danger">Delete</button>
+            </div>
       </div>
     </div>
-  </div>
+</div> <!-- Delete Service  Modal End  -->
 
+<!-- Modal for Edit service -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit the service</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="p-5 text-center">
+                <form id="serviceEidtForm" class="d-none">
+                    <input type="hidden" id="editServiceId" class="form-control mb-2">
+                    <input type="text" id="editServiceTitle" class="form-control mb-2" placeholder="Service Title">
+                    <input type="text" id="editServiceDesc" class="form-control mb-2" placeholder="Service Description">
+                    <input type="text" id="editServiceImage" class="form-control mb-2" placeholder="Service Image Link">   
+                </form>
+                <img id='editServiceLoaderIcon' class="loading-icon" src="{{asset('images/loader.svg')}}" alt="">
+                <h5 id='editServiceFail' class="text-danger d-none">Something went wrong</h5>
+            </div>
+
+            <div class="modal-footer">
+                <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button id="serviceEditConfirmation"  data-id=""  class="btn btn-danger">Save</button>
+            </div>
+      </div>
+    </div>
+</div> <!-- Edit Service  Modal End  -->
+
+<!-- Modal for New service -->
+<div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add New Service</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="p-5 text-center">
+                <div id="serviceAddForm" >
+                    <input type="text" id="addServiceTitle" class="form-control mb-2" placeholder="Service Title">
+                    <input type="text" id="addServiceDesc" class="form-control mb-2" placeholder="Service Description">
+                    <input type="text" id="addServiceImage" class="form-control mb-2" placeholder="Service Image Link">   
+                </div>
+                <h5 id='addServiceFail' class="text-danger d-none">Something went wrong</h5>
+            </div>
+
+            <div class="modal-footer">
+                <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button id="serviceAddConfirmation"  data-id=""  class="btn btn-danger">Save</button>
+            </div>
+      </div>
+    </div>
+</div> <!-- New Service  Modal End  -->
 @endsection
 
 @section('script')
@@ -86,7 +142,7 @@ getServiceData();
                         "<td><img class='table_img' src=" + services[i].service_image + "></td>" +
                         "<td>" + item.service_title + "</td>" +
                         "<td>" + item.service_desc + "</td>" +
-                        "<td><a ><i class='fas fa-edit'></i></a></td>" +
+                        "<td><a data-id=" + item.id + " data-title='" + item.service_title + "' class='editService'><i class='fas fa-edit'></i></a></td>" +
                         "<td><a data-id=" + item.id + " data-title='" + item.service_title + "' class='deleteService'><i class='fas fa-trash-alt'></i></a></td>"
                     ));
                 });
@@ -127,7 +183,6 @@ $(document).on('click', '.deleteService', function () {
 serviceDeleteConfirmation Id, Request sends to database using axios. */
 $(document).on('click', '#serviceDeleteConfirmation', function () {
     var id = $('#serviceDeleteConfirmation').attr('data-id');
-    $('#deleteModal').modal('hide');
     
     //calling the api with id
     deleteSevice(id);
@@ -142,20 +197,161 @@ $(document).on('click', '#serviceDeleteConfirmation', function () {
  * @param id - id
  */
 function deleteSevice(id) {
+    //changing the text of delete button to a loading icon
+    $('#serviceDeleteConfirmation').html("<div class='spinner-border text-light' role='status'></div>");
+   
     axios.post('/deleteService', { id: id }).then(function (response) {
-        if (response.data == 1) {
-            toastr.info('Successfully deleted');
+        if(response.status==200){
+            if (response.data == 1) {
+            $('#deleteModal').modal('hide');
+            toastr.success('Successfully deleted');
             getServiceData();
-        } else {
-            toastr.error('Cannot delete.');
-            getServiceData();
+            } else {
+                $('#deleteModal').modal('hide');
+                toastr.error('Cannot delete.');
+                getServiceData();
+            }
+        }else{
+            $('#deleteModal').modal('hide');
+            toastr.error('Something went wrong.');
         }
     }).catch(function (error) {
-        console.log(error.message.data);
+        $('#deleteModal').modal('hide');
+        toastr.error('Something went wrong.');
+
+    });
+    
+    //changing the loading icon of delete button to text Delete
+    $('#serviceDeleteConfirmation').html("Delete");
+
+}
+
+
+/* A jQuery function that is used to delete a service using modal. When click on
+deleteService class, confirmation dialogue is open. */
+$(document).on('click', '.editService', function () {
+    var id = $(this).data('id');
+    getServiceDataById(id);
+    $('#serviceEditConfirmation').attr('data-id', id);
+    $('#editModal').modal('show');
+});
+
+
+
+
+/* A jQuery function that is used to delete a service using modal. When click
+serviceDeleteConfirmation Id, Request sends to database using axios. */
+$(document).on('click', '#serviceEditConfirmation', function (event) {
+    event.preventDefault();
+    var id = $('#serviceEditConfirmation').attr('data-id');
+    var title = $('#editServiceTitle').val();
+    var desc = $('#editServiceDesc').val();
+    var image = $('#editServiceImage').val();
+    updateService(id, title, desc, image);
+
+});
+
+/**
+ * It gets the service data from the database and displays it in the edit form.
+ * @param id - id of the service
+ */
+function getServiceDataById(id) {
+/* Hiding the form and showing the loader icon before loading the data. */
+    $('#editServiceLoaderIcon').removeClass('d-none');
+    $('#serviceEidtForm').addClass('d-none');
+    $('#editServiceFail').addClass('d-none');
+    axios.post('getServiceDataById', { id: id }).then(function (response) {
+        if (response.status == 200) {
+            $service= response.data;
+           $('#editServiceTitle').val($service['service_title']);
+           $('#editServiceDesc').val($service['service_desc']);
+           $('#editServiceImage').val($service['service_image']);
+           
+           
+        /* Hiding the loader icon and showing the form after loading the data. */
+           $('#serviceEidtForm').removeClass('d-none');
+           $('#editServiceLoaderIcon').addClass('d-none');
+           $('#editServiceFail').addClass('d-none');
+            
+        
+        } else {
+            /* A toastr error message. */
+            toastr.error('Something went wrong.');
+            
+            /* Hiding the loader icon and showing the error message if data not loaded. */
+            $('#editServiceFail').removeClass('d-none');
+            $('#serviceEidtForm').addClass('d-none');
+            $('#editServiceLoaderIcon').addClass('d-none');
+
+        }
+    }).catch(function (error) {
+        /* A toastr error message. */
+        toastr.error(error.message);
+
+        /* Hiding the loader icon and showing the error message if data not loaded. */
+        $('#editServiceFail').removeClass('d-none');
+        $('#serviceEidtForm').addClass('d-none');
+        $('#editServiceLoaderIcon').addClass('d-none');
 
     });
 }
 
+/**
+ * It updates the service in the database.
+ * @param id - id of the service,
+ * @param title - The title of the service.
+ * @param desc - The description of the service,
+ * @param image - The image link of the of the service
+ */
+function updateService(id, title, desc, image) {
+
+    if(title.trim().length==0){
+        toastr.error("Title should not be empty");
+    }else if(desc.trim().length==0){
+        toastr.error("Description should not be empty");
+    }else if(image.trim().length < 10){
+        toastr.error("Image Link error");
+    }else{
+         //changing the text of Edit button to a loading icon
+         $('#serviceEditConfirmation').html("<div class='spinner-border text-light' role='status'></div>");
+
+        axios.post('/updateService', { id: id, title: title, desc: desc, image: image }).then(function (response) {
+            if(response.status==200){
+                $('#editModal').modal('hide');
+
+                if (response.data == 1) {
+                
+                    /* A toastr message. */
+                    toastr.success('Service Successfully Upadted');
+                   
+                    /* A function that is used to get all the services from database and show them in the table. */
+                    getServiceData();
+                } else {
+                    
+                    /* A toastr message. */
+                    toastr.error('Service Update Fail.');
+                    /* A function that is used to get all the services from database and show them in the table. */
+                    getServiceData();
+                }
+            }else{
+                $('#editModal').modal('hide');
+
+                /* A toastr message. */
+                toastr.error('Service Update Fail.');
+            }
+        }).catch(function (error) {
+            $('#editModal').modal('hide');
+
+            toastr.error('Something went wrong.');
+    
+        });
+
+        //changing the loading icon of Edit button to text Save
+        $('#serviceEditConfirmation').html("Save");
+    
+    }
+    
+}
 
 </script>
 @endsection
