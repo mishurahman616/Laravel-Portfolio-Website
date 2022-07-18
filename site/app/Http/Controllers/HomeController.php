@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Service;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
@@ -21,9 +22,10 @@ class HomeController extends Controller
         $timeDate=date('Y-m-d h:i:sa');
         Visitor::insert(['ip_address'=>$userIP, 'visiting_time'=>$timeDate]);
 
-        $serviceData=Service::orderBy('id')->limit(4)->get();
+        $serviceData=Service::orderBy('id', 'desc')->limit(4)->get();
+        $courseData=Course::orderBy('id', 'desc')->limit(6)->get();
 
-        return view('home', ['serviceData'=>$serviceData]);
+        return view('home', ['serviceData'=>$serviceData, 'courseData'=>$courseData]);
     }
 
 

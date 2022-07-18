@@ -8,5 +8,6 @@ Home
 @section('content')
 @include('component.homeBanner')
 @include('component.homeServices')
+@include('component.homeCourses')
 @endsection
 

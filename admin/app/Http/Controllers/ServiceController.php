@@ -63,6 +63,13 @@ class ServiceController extends Controller
         }
     }
 
+    /**
+     * It updates the service table in the database.
+     * 
+     * @param Request req The request object.
+     * 
+     * @return 1 or 0
+     */
     function updateService(Request $req)
     {
        
@@ -83,6 +90,13 @@ class ServiceController extends Controller
             return 0;
         }
     }
+    /**
+     * It adds a service to the database.
+     * 
+     * @param Request req The request object.
+     * 
+     * @return 1 or 0
+     */
     function addService(Request $req)
     {
        
