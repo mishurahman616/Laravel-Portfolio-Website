@@ -14,7 +14,7 @@ Admin | Services
 
             <!--Button for add new service -->
             <button id="addNewServiceButton" class="btn btn-primary mb-3 ml-0">Add New</button>
-            <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="admin-service-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th class="th-sm">Serial</th>
@@ -134,6 +134,7 @@ getServiceData();
         .then(function (response) {
             if (response.status == 200) {
                 var services = response.data;
+                $('#admin-service-table').DataTable().destroy();
                 $('#service-table-body').empty();
                 $.each(services, function (i, item) {
                     $('#service-table-body').append($('<tr>').html(
@@ -158,7 +159,10 @@ getServiceData();
                 $('#service-table-loader').addClass('d-none');
                 $('#service-table-fail').removeClass('d-none');
             }
-
+            $(document).ready( function () {
+                $('#admin-service-table').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            } );
         })
         .catch(function (error) {
             /* If error occured then hiding the table and showing the error message. */

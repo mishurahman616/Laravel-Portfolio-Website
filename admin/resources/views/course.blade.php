@@ -11,7 +11,7 @@ Admin | Courses
         <div class="col-md-12 p-5">
             <h4 class="text-center">All Courses</h4>
             <button id="addNewCourseButton" class="btn btn-primary mb-3 ml-0">Add New</button>
-            <table class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
+            <table id="admin-course-table" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th class="th-sm">Serial</th>
@@ -315,6 +315,7 @@ function getCourseData() {
         .then(function (response) {
             if (response.status == 200) {
                 var courses = response.data;
+                $('#admin-course-table').DataTable().destroy();
                 $('#course-table-body').empty();
                 $.each(courses, function (i, course) {
                     $('#course-table-body').append($('<tr>').html(
@@ -340,6 +341,10 @@ function getCourseData() {
                 $('#course-table-loader').addClass('d-none');
                 $('#course-table-fail').removeClass('d-none');
             }
+            $(document).ready( function () {
+                $('#admin-course-table').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            } );
 
         })
         .catch(function (error) {
