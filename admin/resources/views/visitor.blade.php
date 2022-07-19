@@ -38,7 +38,7 @@ Admin | Visistors
 <script type="text/javascript">
     /* Display visitor table after document ready */
 $(document).ready(function () {
-    $('#VisitorDt').DataTable();
+    $('#VisitorDt').DataTable({"order":false});
     $('.dataTables_length').addClass('bs-select');
 });
 

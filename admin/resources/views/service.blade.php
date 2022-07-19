@@ -159,8 +159,10 @@ getServiceData();
                 $('#service-table-loader').addClass('d-none');
                 $('#service-table-fail').removeClass('d-none');
             }
+
+            //Jquery datatable for service table
             $(document).ready( function () {
-                $('#admin-service-table').DataTable();
+                $('#admin-service-table').DataTable({"order":false});
                 $('.dataTables_length').addClass('bs-select');
             } );
         })

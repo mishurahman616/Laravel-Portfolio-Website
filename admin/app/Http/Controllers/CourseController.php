@@ -23,7 +23,7 @@ class CourseController extends Controller
      */
     public function getCourseData()
     {
-        return Course::orderBy('id')->get();
+        return Course::orderBy('id', 'desc')->get();
     }
 
     /**

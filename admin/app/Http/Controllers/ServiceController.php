@@ -24,7 +24,7 @@ class ServiceController extends Controller
      */
     public function getServiceData()
     {
-        return Service::orderBy('id')->get();
+        return Service::orderBy('id', 'desc')->get();
     }
 
 

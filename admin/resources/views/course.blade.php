@@ -342,7 +342,7 @@ function getCourseData() {
                 $('#course-table-fail').removeClass('d-none');
             }
             $(document).ready( function () {
-                $('#admin-course-table').DataTable();
+                $('#admin-course-table').DataTable({"order":false});
                 $('.dataTables_length').addClass('bs-select');
             } );
 
