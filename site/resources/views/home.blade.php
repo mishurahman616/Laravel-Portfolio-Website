@@ -9,5 +9,6 @@ Home
 @include('component.homeBanner')
 @include('component.homeServices')
 @include('component.homeCourses')
+@include('component.homeProjects')
 @endsection
 

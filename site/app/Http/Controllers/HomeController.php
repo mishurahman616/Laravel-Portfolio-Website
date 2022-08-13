@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Service;
 use App\Models\Visitor;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +25,9 @@ class HomeController extends Controller
 
         $serviceData=Service::orderBy('id', 'desc')->limit(4)->get();
         $courseData=Course::orderBy('id', 'desc')->limit(6)->get();
+        $projectData=Project::orderBy('id', 'desc')->limit(10)->get();
 
-        return view('home', ['serviceData'=>$serviceData, 'courseData'=>$courseData]);
+        return view('home', ['serviceData'=>$serviceData, 'courseData'=>$courseData, 'projectData'=>$projectData]);
     }
 
 

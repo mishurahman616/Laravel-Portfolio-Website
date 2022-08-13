@@ -28,6 +28,7 @@ $(document).ready(function() {
             }
         }
     });
+
     two.owlCarousel({
         autoplay:true,
         loop:true,
@@ -49,6 +50,7 @@ $(document).ready(function() {
     });
 
 });
+
 // Owl Carousel End..................
 
 

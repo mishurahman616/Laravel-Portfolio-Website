@@ -387,7 +387,7 @@ function addCourse(name, desc, fee, totalEnroll, totalClass, link, image) {
     } else if (image.trim().length < 10) {
         toastr.error("Course image Error");
     } else {
-        //changing the text of Edit button to a loading icon
+        //changing the text of Save button to a loading icon
         $('#courseAddConfirmation').html("<div class='spinner-border text-light' role='status'></div>");
 
         axios.post('/addCourse', { name: name, desc: desc, fee: fee, totalEnroll: totalEnroll, totalClass: totalClass, link: link, image: image }).then(function (response) {

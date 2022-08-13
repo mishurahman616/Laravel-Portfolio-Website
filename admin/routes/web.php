@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,11 @@ Route::post('/getCourseDataById', [CourseController::class, 'getCourseDataById']
 Route::post('/deleteCourse', [CourseController::class, 'deleteCourse']);
 Route::post('/updateCourse', [CourseController::class, 'updateCourse']);
 Route::post('/addCourse', [CourseController::class, 'addCourse']);
+
+//Admin Project Controller
+Route::get('/projects', [ProjectController::class, 'projectIndex']);
+Route::get('/getProjectData', [ProjectController::class, 'getProjectData']);
+Route::post('/getProjectDataById', [ProjectController::class, 'getProjectDataById']);
+Route::post('/deleteProject', [ProjectController::class, 'deleteProject']);
+Route::post('/updateProject', [ProjectController::class, 'updateProject']);
+Route::post('/addProject', [ProjectController::class, 'addProject']);
