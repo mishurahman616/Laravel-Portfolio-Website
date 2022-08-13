@@ -67,4 +67,14 @@ class ProjectController extends Controller
             return 0;
         }
     }
+    public function deleteProject(Request $req)
+    {
+        
+        $req->validate([
+            'id'=>'required|int|min:0'
+        ]);
+        $id=$req->input('id');
+        $result=Project::findOrFail($id)->delete();
+        return $result;
+    }
 }

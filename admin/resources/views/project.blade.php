@@ -211,6 +211,23 @@
       </div>
     </div>
   </div>    <!-- End Project View Modal -->
+
+  <!-- Modal for delete Project -->
+<div class="modal fade" id="projectDeleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="projectDeleteModalLabel">Are you sure to delete?</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <h6 class="text-left ml-3 pt-2" id="projectDeleteTitle"></h6>
+            <div class="modal-footer">
+                <button  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button id="projectDeleteConfirmation"  data-id=""  class="btn btn-danger">Delete</button>
+            </div>
+      </div>
+    </div>
+</div> <!-- Delete Project  Modal End  -->
 @endsection
 
 @section('script')
@@ -234,8 +251,8 @@
                                 "<td><img class='table_img' src=" + projects[i].project_image + " width='100px' height='100px'></td>" +
                                 "<td>" + item.project_title + "</td>" +
                                 "<td>" + item.project_desc + "</td>" +
-                                "<td><a data-id=" + item.id + " data-title='" + item.project_title + "' class='viewProject'><i class='fas fa-eye'></i></a></td>" +
-                                "<td><a data-id=" + item.id + " data-title='" + item.project_title + "' class='editProject'><i class='fas fa-edit'></i></a></td>" +
+                                "<td><a data-id=" + item.id + " class='viewProject'><i class='fas fa-eye'></i></a></td>" +
+                                "<td><a data-id=" + item.id + " class='editProject'><i class='fas fa-edit'></i></a></td>" +
                                 "<td><a data-id=" + item.id + " data-title='" + item.project_title + "' class='deleteProject'><i class='fas fa-trash-alt'></i></a></td>"
                             ));
                         });
@@ -449,6 +466,48 @@
                     }
                 })
             }
+        }
+        $(document).on('click', '.deleteProject', function(){
+            let id= $(this).attr('data-id');
+            let title=$(this).attr('data-title');
+            $('#projectDeleteModal').modal('show');
+            $('#projectDeleteTitle').html(title);
+            $('#projectDeleteConfirmation').attr('data-id', id);
+        });
+        $(document).on('click', '#projectDeleteConfirmation', function(){
+            //Change the Button text to loading icon while calling the api
+            $('#projectDeleteConfirmation').html("<div class='spinner-border text-light' role='status'></div>");
+            let id=$(this).attr('data-id');
+            deleteProject(id);
+        })
+
+        function deleteProject(idofProejct){
+            let id=Number(idofProejct);
+            if(typeof id=='number' && id>=0){
+                axios.post('/deleteProject', {id:id}).then(function(response){
+                if(response.status==200){
+                    if(response.data==1){
+                        toastr.success('Project Deleted Successfully');
+                        $('#projectDeleteModal').modal('hide');
+                        getProjectData();
+                    }else{
+                        toastr.error('Cannot Delete');
+                    }
+                }else{
+                    toastr.error('Cannot Delete');
+                }
+                $('#projectDeleteConfirmation').html('Delete');
+
+            }).catch(function(error){
+                toastr.error('Cannot Delete');
+                $('#projectDeleteConfirmation').html('Delete');
+
+            })
+            }else{
+                toastr.error("Invalid Project");
+                $('#projectDeleteConfirmation').html('Delete');
+            }
+            
         }
     </script>
 @endsection
