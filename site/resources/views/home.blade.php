@@ -10,5 +10,6 @@ Home
 @include('component.homeServices')
 @include('component.homeCourses')
 @include('component.homeProjects')
+@include('component.homeContact')
 @endsection
 

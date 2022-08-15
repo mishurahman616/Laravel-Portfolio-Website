@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'HomeIndex']);
+Route::post('/sendMessage', [HomeController::class, 'ContactSend']);

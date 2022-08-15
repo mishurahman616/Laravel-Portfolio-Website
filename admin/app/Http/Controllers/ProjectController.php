@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -30,7 +31,14 @@ class ProjectController extends Controller
         $image=$req->input('image');
         $link=$req->input('link');
         $desc=$req->input('desc');
-        $result= Project::insert(['project_title'=>$title, 'project_desc'=>$desc,  'project_link'=>$link, 'project_image'=>$image]);
+        $result= Project::insert([
+            'project_title'=>$title, 
+            'project_desc'=>$desc,  
+            'project_link'=>$link, 
+            'project_image'=>$image,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),  
+        ]);
         if($result==true){
             return 1;
         }else{
@@ -60,7 +68,13 @@ class ProjectController extends Controller
         $image=$req->input('image');
         $link=$req->input('link');
         $desc=$req->input('desc');
-        $result= Project::where('id', '=', $id)->update(['project_title'=>$title, 'project_desc'=>$desc,  'project_link'=>$link, 'project_image'=>$image]);
+        $result= Project::where('id', '=', $id)->update([
+            'project_title'=>$title, 
+            'project_desc'=>$desc,  
+            'project_link'=>$link, 
+            'project_image'=>$image,
+            'updated_at'=> Carbon::now(),  
+        ]);
         if($result==true){
             return 1;
         }else{

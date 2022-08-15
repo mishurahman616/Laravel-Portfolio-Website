@@ -56,78 +56,81 @@ $(document).ready(function() {
 
 // Contact Send
 
-$('#contactSendBtnId').click(function () {
-    var contactName= $('#contactNameId').val();
-    var contactMobile= $('#contactMobileId').val();
-    var contactEmail= $('#contactEmailId').val();
-    var contactMsg= $('#contactMsgId').val();
-    SendContact(contactName,contactMobile,contactEmail,contactMsg);
+$('#contactSendButton').click(function () {
+    var contactName= $('#contactName').val();
+    var contactMobile= $('#contactMobile').val();
+    var contactEmail= $('#contactEmail').val();
+    var contactMsg= $('#contactMessage').val();
+    sendMessage(contactName,contactMobile,contactEmail,contactMsg);
 });
 
-function SendContact(contact_name,contact_mobile,contact_email,contact_msg) {
+function sendMessage(contact_name,contact_mobile,contact_email,contact_msg) {
 
-    if(contact_name.length==0){
-        $('#contactSendBtnId').html('আপনার নাম লিখুন !');
+    if(contact_name.trim().length==0){
+        $('#contactSendButton').html('আপনার নাম লিখুন !');
         setTimeout(function () {
-            $('#contactSendBtnId').html('পাঠিয়ে দিন');
+            $('#contactSendButton').html('পাঠিয়ে দিন');
         },2000)
     }
-    else if(contact_mobile.length==0){
-        $('#contactSendBtnId').html('আপনার মোবাইল নং লিখুন !')
+    else if(contact_mobile.trim().length==0){
+        $('#contactSendButton').html('আপনার মোবাইল নং লিখুন !')
         setTimeout(function () {
-            $('#contactSendBtnId').html('পাঠিয়ে দিন');
+            $('#contactSendButton').html('পাঠিয়ে দিন');
         },2000)
     }
-    else if(contact_email.length==0){
-        $('#contactSendBtnId').html('আপনার ইমেইল  লিখুন !')
+    else if(contact_email.trim().length==0){
+        $('#contactSendButton').html('আপনার ইমেইল  লিখুন !')
         setTimeout(function () {
-            $('#contactSendBtnId').html('পাঠিয়ে দিন');
+            $('#contactSendButton').html('পাঠিয়ে দিন');
         },2000)
     }
-    else if(contact_msg.length==0){
+    else if(contact_msg.trim().length==0){
 
-        $('#contactSendBtnId').html('আপনার মেসেজ লিখুন !')
+        $('#contactSendButton').html('আপনার মেসেজ লিখুন !')
         setTimeout(function () {
-            $('#contactSendBtnId').html('পাঠিয়ে দিন');
+            $('#contactSendButton').html('পাঠিয়ে দিন');
         },2000)
 
     }
     else {
-        $('#contactSendBtnId').html('পাঠানো হচ্ছে...')
-        axios.post('/contactSend',{
-            contact_name:contact_name,
-            contact_mobile:contact_mobile,
-            contact_email:contact_email,
-            contact_msg: contact_msg,
+        $('#contactSendButton').html('পাঠানো হচ্ছে...')
+
+        axios.post('/sendMessage',{
+            name:contact_name,
+            mobile:contact_mobile,
+            email:contact_email,
+            message: contact_msg,
         })
             .then(function (response) {
                 if(response.status==200){
                     if(response.data==1){
-                        $('#contactSendBtnId').html('অনুরোধ সফল হয়েছে')
+                        $('#contactSendButton').html('পাঠানো হয়েছে!');
+                        $('#contactForm :input').val('');
                         setTimeout(function () {
-                            $('#contactSendBtnId').html('পাঠিয়ে দিন');
-                        },3000)
+                            $('#contactSendButton').html('পাঠিয়ে দিন');
+
+                        },4000)
 
                     }
                     else{
-                        $('#contactSendBtnId').html('অনুরোধ ব্যার্থ হয়েছে ! আবার চেষ্টা করুন ')
+                        $('#contactSendButton').html('অনুরোধ ব্যার্থ হয়েছে ! আবার চেষ্টা করুন ')
                         setTimeout(function () {
-                            $('#contactSendBtnId').html('পাঠিয়ে দিন');
-                        },3000)
+                            $('#contactSendButton').html('পাঠিয়ে দিন');
+                        },4000)
                     }
                 }
                 else {
-                    $('#contactSendBtnId').html('অনুরোধ ব্যার্থ হয়েছে ! আবার চেষ্টা করুন ')
+                    $('#contactSendButton').html('অনুরোধ ব্যার্থ হয়েছে ! আবার চেষ্টা করুন ')
                     setTimeout(function () {
-                        $('#contactSendBtnId').html('পাঠিয়ে দিন');
-                    },3000)
+                        $('#contactSendButton').html('পাঠিয়ে দিন');
+                    },4000)
                 }
 
             }).catch(function (error) {
-            $('#contactSendBtnId').html('আবার চেষ্টা করুন')
+            $('#contactSendButton').html('আবার চেষ্টা করুন')
             setTimeout(function () {
-                $('#contactSendBtnId').html('পাঠিয়ে দিন');
-            },3000)
+                $('#contactSendButton').html('পাঠিয়ে দিন');
+            },4000)
         })
     }
 }

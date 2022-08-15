@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -87,7 +88,16 @@ class CourseController extends Controller
         $totalClass=$req->input('totalClass');
         $link=$req->input('link');
         $image=$req->input('image');
-        $result= Course::where('id','=',$id)->update(['course_name'=>$name, 'course_desc'=>$desc, 'course_fee'=>$fee, 'course_total_enroll'=>$totalEnroll, 'course_total_class'=>$totalClass, 'course_link'=>$link, 'course_image'=>$image]);
+        $result= Course::where('id','=',$id)->update([
+            'course_name'=>$name, 
+            'course_desc'=>$desc, 
+            'course_fee'=>$fee, 
+            'course_total_enroll'=>$totalEnroll, 
+            'course_total_class'=>$totalClass, 
+            'course_link'=>$link, 
+            'course_image'=>$image,            
+            'updated_at'=> Carbon::now(),  
+        ]);
         if($result==true){
             return 1;
         }else{
@@ -121,7 +131,17 @@ class CourseController extends Controller
         $totalClass=$req->input('totalClass');
         $link=$req->input('link');
         $image=$req->input('image');
-        $result= Course::insert(['course_name'=>$name, 'course_desc'=>$desc, 'course_fee'=>$fee, 'course_total_enroll'=>$totalEnroll, 'course_total_class'=>$totalClass, 'course_link'=>$link, 'course_image'=>$image]);
+        $result= Course::insert([
+            'course_name'=>$name, 
+            'course_desc'=>$desc, 
+            'course_fee'=>$fee, 
+            'course_total_enroll'=>$totalEnroll, 
+            'course_total_class'=>$totalClass, 
+            'course_link'=>$link, 
+            'course_image'=>$image,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),  
+        ]);
         if($result==true){
             return 1;
         }else{

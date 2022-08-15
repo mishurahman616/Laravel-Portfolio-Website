@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -83,7 +84,12 @@ class ServiceController extends Controller
         $title=$req->input('title');
         $desc=$req->input('desc');
         $image=$req->input('image');
-        $result= Service::where('id','=',$id)->update(['service_title'=>$title, 'service_desc'=>$desc, 'service_image'=>$image]);
+        $result= Service::where('id','=',$id)->update([
+            'service_title'=>$title, 
+            'service_desc'=>$desc, 
+            'service_image'=>$image,
+            'updated_at'=> Carbon::now(),
+        ]);
         if($result==true){
             return 1;
         }else{
@@ -108,7 +114,13 @@ class ServiceController extends Controller
         $title=$req->input('title');
         $desc=$req->input('desc');
         $image=$req->input('image');
-        $result= Service::insert(['service_title'=>$title, 'service_desc'=>$desc, 'service_image'=>$image]);
+        $result= Service::insert([
+            'service_title'=>$title, 
+            'service_desc'=>$desc, 
+            'service_image'=>$image,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),
+        ]);
         if($result==true){
             return 1;
         }else{

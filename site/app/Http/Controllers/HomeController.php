@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Course;
 use App\Models\Service;
 use App\Models\Visitor;
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,6 +30,32 @@ class HomeController extends Controller
         $projectData=Project::orderBy('id', 'desc')->limit(10)->get();
 
         return view('home', ['serviceData'=>$serviceData, 'courseData'=>$courseData, 'projectData'=>$projectData]);
+    }
+    function ContactSend(Request $request){
+        $request->validate([
+            'name'=>'required|string|min:2|max:255',
+            'mobile'=>'required|string|min:2|max:255',
+            'email'=>'required|email',
+            'message'=>'required|string|min:2|max:500',
+        ]);
+
+        $name=$request->input('name');
+        $mobile=$request->input('mobile');
+        $email=$request->input('email');
+        $message=$request->input('message');
+        $result = Contact::insert([
+            'name'=>$name,
+            'mobile'=>$mobile,
+            'email'=>$email,
+            'message'=>$message,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),            
+        ]);
+        if($result){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 
