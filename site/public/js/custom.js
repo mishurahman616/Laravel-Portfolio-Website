@@ -127,6 +127,7 @@ function sendMessage(contact_name,contact_mobile,contact_email,contact_msg) {
                 }
 
             }).catch(function (error) {
+                alert(error.message)
             $('#contactSendButton').html('আবার চেষ্টা করুন')
             setTimeout(function () {
                 $('#contactSendButton').html('পাঠিয়ে দিন');

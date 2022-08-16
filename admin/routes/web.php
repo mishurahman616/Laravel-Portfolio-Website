@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ServiceController;
@@ -45,3 +46,10 @@ Route::post('/getProjectDataById', [ProjectController::class, 'getProjectDataByI
 Route::post('/deleteProject', [ProjectController::class, 'deleteProject']);
 Route::post('/updateProject', [ProjectController::class, 'updateProject']);
 Route::post('/addProject', [ProjectController::class, 'addProject']);
+
+
+//Admin Contact Controller
+Route::get('/contacts', [ContactController::class, 'contactIndex']);
+Route::get('/getContactData', [ContactController::class, 'getContactData']);
+Route::post('/getContactDataById', [ContactController::class, 'getContactDataById']);
+Route::post('/deleteContactById', [ContactController::class, 'deleteContactById']);
