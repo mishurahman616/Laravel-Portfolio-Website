@@ -26,6 +26,8 @@
     <!-- Yield content section-->
     @yield('content')
 
+	<!-- include Footer section-->
+    @include('layout.footer')
 
     <!--Necessary  Javascript  -->
 <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>

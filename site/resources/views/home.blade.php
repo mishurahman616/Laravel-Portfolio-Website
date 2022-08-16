@@ -11,5 +11,7 @@ Home
 @include('component.homeCourses')
 @include('component.homeProjects')
 @include('component.homeContact')
+@include('component.homeBlogs')
+@include('component.homeReviews')
 @endsection
 

@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Service;
 use App\Models\Visitor;
 use App\Models\Project;
+use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,14 @@ class HomeController extends Controller
         $serviceData=Service::orderBy('id', 'desc')->limit(4)->get();
         $courseData=Course::orderBy('id', 'desc')->limit(6)->get();
         $projectData=Project::orderBy('id', 'desc')->limit(10)->get();
+        $reviewData=Review::orderBy('id', 'desc')->limit(10)->get();
 
-        return view('home', ['serviceData'=>$serviceData, 'courseData'=>$courseData, 'projectData'=>$projectData]);
+        return view('home', [
+            'serviceData'=>$serviceData, 
+            'courseData'=>$courseData, 
+            'projectData'=>$projectData,
+            'reviewData'=>$reviewData,
+        ]);
     }
     function ContactSend(Request $request){
         $request->validate([
