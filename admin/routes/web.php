@@ -6,6 +6,7 @@ use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,9 +48,14 @@ Route::post('/deleteProject', [ProjectController::class, 'deleteProject']);
 Route::post('/updateProject', [ProjectController::class, 'updateProject']);
 Route::post('/addProject', [ProjectController::class, 'addProject']);
 
-
 //Admin Contact Controller
 Route::get('/contacts', [ContactController::class, 'contactIndex']);
-Route::get('/getContactData', [ContactController::class, 'getContactData']);
-Route::post('/getContactDataById', [ContactController::class, 'getContactDataById']);
 Route::post('/deleteContactById', [ContactController::class, 'deleteContactById']);
+
+//Admin Review Controller
+Route::get('/reviews', [ReviewController::class, 'reviewIndex']);
+Route::get('/getReviewData', [ReviewController::class, 'getReviewData']);
+Route::post('/getReviewDataById', [ReviewController::class, 'getReviewDataById']);
+Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
+Route::post('/updateReview', [ReviewController::class, 'updateReview']);
+Route::post('/addReview', [ReviewController::class, 'addReview']);
