@@ -1,3 +1,20 @@
+@extends('layout.app')
+
+@section('title')
+Contact
+@endsection
+
+@section('content')
+<div class="container-fluid jumbotron mt-5 ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6  text-center">
+                <img class=" page-top-img fadeIn" src="images/knowledge.svg">
+                <h1 class="page-top-title mt-3">- যোগাযোগ -</h1>
+        </div>
+    </div>
+</div>
+
+
 <div id="contactId" class="container-fluid section-marginTop parallax text-center">
     <div class="row ">
         <div class="col-md-6 contact-form ">
@@ -23,3 +40,4 @@
 
     </div>
 </div>
+@endsection
