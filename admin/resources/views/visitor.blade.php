@@ -6,13 +6,15 @@ Admin | Visistors
 @endsection
 
 @section('content')
+<h3 class="text-center py-3 bg-light m-3 rounded"> Visitors Information</h3> 
+
 <div class="container">
     <div class="row">
-    <div class="col-md-12 p-5">
+    <div class="col-md-12 px-5 pt-0">
     <table id="VisitorDt" class="table table-striped table-sm table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th class="th-sm">NO</th>
+          <th class="th-sm">Serial</th>
           <th class="th-sm">IP</th>
           <th class="th-sm">Date & Time</th>
         </tr>

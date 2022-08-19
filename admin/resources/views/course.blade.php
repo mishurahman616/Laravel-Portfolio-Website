@@ -5,11 +5,12 @@ Admin | Courses
 @endsection
 
 @section('content')
+<h3 class="text-center py-3 bg-light m-3 rounded"> All Courses</h3> 
+
 <!-- Display if courses table data loaded successfully-->
 <div id="course-table-main d-none" class="contain ">
     <div class="row">
-        <div class="col-md-12 p-5">
-            <h4 class="text-center">All Courses</h4>
+        <div class="col-md-12 px-5 pt-0">
             <button id="addNewCourseButton" class="btn btn-primary mb-3 ml-0">Add New</button>
             <table id="admin-course-table" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                 <thead>

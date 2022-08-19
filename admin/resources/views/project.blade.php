@@ -4,12 +4,11 @@
 @endsection
 
 @section('content')
+<h3 class="text-center py-3 bg-light m-3 rounded"> All Projects </h3> 
     <!-- Display if data loaded successfully-->
     <div id="project-table-main" class="container d-none">
         <div class="row">
-            <div class="col-md-12 p-5">
-                <h4 class="text-center">All Projects</h4>
-
+            <div class="col-md-12 px-5 pt-0">
                 <!--Button for add new service -->
                 <button id="addNewProjectButton" class="btn btn-primary mb-3 ml-0" >Add New</button>
                 <table id="admin-project-table" class="table table-striped table-bordered" cellspacing="0" width="100%">

@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'HomeIndex']);
+Route::middleware(['loginCheck'])->group(function () {
+    Route::get('/', [HomeController::class, 'HomeIndex'])->middleware('loginCheck');
 
 Route::get('/visitors', [VisitorController::class, 'visitorIndex']);
 
@@ -59,3 +61,9 @@ Route::post('/getReviewDataById', [ReviewController::class, 'getReviewDataById']
 Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
 Route::post('/updateReview', [ReviewController::class, 'updateReview']);
 Route::post('/addReview', [ReviewController::class, 'addReview']);
+Route::get('/logout', [LoginController::class, 'onLogout']);
+});
+
+
+Route::get('/login', [LoginController::class, 'loginIndex']);
+Route::post('/loginRequest', [LoginController::class, 'onLogin']);

@@ -6,10 +6,11 @@ Admin | Contacts
 @endsection
 
 @section('content')
+<h3 class="text-center py-3 bg-light m-3 mb-0 rounded"> All Messages</h3> 
+
 <div class="container">
     <div class="row">
-    <div class="col-md-12 p-5">
-        <h1 class="text-center">Contacts</h1>
+    <div class="col-md-12 px-5 pt-0">
     <table id="VisitorDt" class="table table-striped table-sm table-bordered text-center" cellspacing="0" width="100%">
       <thead>
         <tr>
