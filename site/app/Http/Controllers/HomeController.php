@@ -19,7 +19,7 @@ class HomeController extends Controller
  * 
  * @return A view is being returned.
  */
-    function HomeIndex(){
+    function homeIndex(){
     /* Inserting the visitor's IP address and visiting time into the database. */
         $userIP=$_SERVER['REMOTE_ADDR'];
         date_default_timezone_set("Asia/Dhaka");
@@ -38,7 +38,7 @@ class HomeController extends Controller
             'reviewData'=>$reviewData,
         ]);
     }
-    function ContactSend(Request $request){
+    function contactSend(Request $request){
         $request->validate([
             'name'=>'required|string|min:2|max:255',
             'mobile'=>'required|string|min:2|max:255',
