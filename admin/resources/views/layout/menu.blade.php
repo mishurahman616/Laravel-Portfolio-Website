@@ -24,7 +24,8 @@
                     <li> <a href="{{url('courses')}}" ><span> <i class="fas fa-book-open"></i> </span><span class="hide-menu">Courses</span></a></li>
                     <li> <a href="{{url('projects')}}" ><span> <i class="fas fa-code"></i> </span><span class="hide-menu">Projects</span></a></li>
                     <li> <a href="{{url('reviews')}}" ><span> <i class="fas fa-code"></i> </span><span class="hide-menu">Reviews</span></a></li>
-                    <li> <a href="{{url('contacts')}}" ><span> <i class="fa fa-envelope"></i></i> </span><span class="hide-menu">Contacts</span></a></li>
+                    <li> <a href="{{url('contacts')}}" ><span> <i class="fa fa-envelope"></i> </span><span class="hide-menu">Contacts</span></a></li>
+                    <li> <a href="{{url('gallery')}}" ><span> <i class="fa fa-images"></i> </span><span class="hide-menu">Gallery</span></a></li>
                 </ul>
             </nav>
         </div>

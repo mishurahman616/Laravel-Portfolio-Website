@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ImageGalleryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\LoginController;
@@ -61,9 +62,16 @@ Route::post('/getReviewDataById', [ReviewController::class, 'getReviewDataById']
 Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
 Route::post('/updateReview', [ReviewController::class, 'updateReview']);
 Route::post('/addReview', [ReviewController::class, 'addReview']);
+
+//Admin Gallery Controller
+Route::get('/gallery', [ImageGalleryController::class, 'imageGalleryIndex']);
+Route::post('/saveImage', [ImageGalleryController::class, 'saveImage']);
+
+
+//Admin Login Controller
 Route::get('/logout', [LoginController::class, 'onLogout']);
 });
 
-
+//Login Controller
 Route::get('/login', [LoginController::class, 'loginIndex']);
 Route::post('/loginRequest', [LoginController::class, 'onLogin']);
